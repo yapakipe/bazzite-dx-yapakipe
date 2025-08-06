@@ -18,3 +18,14 @@ See [Bazzite's rebase guide](https://docs.bazzite.gg/Installing_and_Managing_Sof
 Pay special attention to the warning that says "Rebasing between different desktop environments (e.g. KDE Plasma to GNOME) may cause issues and is unsupported.".
 
 This image is using KDE Plasma, so only rebase from/to other Fedora atomic images that also use KDE Plasma as their desktop environment.
+
+To rebase to this image:
+
+```bash
+rpm-ostree rebase  ostree-image-signed:docker://ghcr.io/yapakipe/bazzite-dx-yapakipe:latest
+```
+
+To rebase back to bazzite-dx:
+```bash
+rpm-ostree rebase ostree-unverified-registry:ghcr.io/ublue-os/bazzite-dx:stable
+```
