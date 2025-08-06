@@ -2,6 +2,9 @@
 
 set -ouex pipefail
 
+IMAGE_NAME="Bazzite-DX-yapakipe"
+IMAGE_PRETTY_NAME="Bazzite-DX Yapakipe (FROM Bazzite-DX)"
+
 ### Install packages
 
 # Packages can be installed from any enabled yum repo on the image.
@@ -22,3 +25,8 @@ dnf5 install -y \
 
 #### Example for enabling a System Unit File
 #systemctl enable podman.socket
+
+# Modify OS Release File 
+sed -i "s/^VARIANT_ID=.*/VARIANT_ID=$IMAGE_NAME/" /usr/lib/os-release
+sed -i "s/^PRETTY_NAME=.*/PRETTY_NAME=\"$IMAGE_PRETTY_NAME\"/" /usr/lib/os-release
+sed -i "s/^NAME=.*/NAME=\"$IMAGE_NAME\"/" /usr/lib/os-release
