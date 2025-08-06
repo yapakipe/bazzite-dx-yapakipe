@@ -2,6 +2,7 @@
 
 set -ouex pipefail
 
+BUILD_SCRIPTS_PATH="$(realpath "$(dirname $0)")"
 IMAGE_NAME="Bazzite-DX-yapakipe"
 IMAGE_PRETTY_NAME="Bazzite-DX Yapakipe (FROM Bazzite-DX)"
 
@@ -31,6 +32,6 @@ sed -i "s/^VARIANT_ID=.*/VARIANT_ID=$IMAGE_NAME/" /usr/lib/os-release
 sed -i "s/^PRETTY_NAME=.*/PRETTY_NAME=\"$IMAGE_PRETTY_NAME\"/" /usr/lib/os-release
 sed -i "s/^NAME=.*/NAME=\"$IMAGE_NAME\"/" /usr/lib/os-release
 
-./99-build-initramfs.sh
+source "$BUILD_SCRIPTS_PATH/99-build-initramfs.sh"
 
-./999-cleanup.sh
+source "$BUILD_SCRIPTS_PATH/999-cleanup.sh"
