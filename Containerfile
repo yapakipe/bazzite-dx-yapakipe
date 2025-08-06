@@ -2,9 +2,6 @@
 FROM scratch AS ctx
 COPY build_files /
 
-ARG IMAGE_NAME="${IMAGE_NAME:-bazzite-dx-yapakipe}"
-ARG IMAGE_VENDOR="{IMAGE_VENDOR:-yapakipe}"
-
 # Base Image
 FROM ghcr.io/ublue-os/bazzite-dx:stable
 
