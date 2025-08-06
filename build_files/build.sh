@@ -30,7 +30,3 @@ dnf5 install -y \
 sed -i "s/^VARIANT_ID=.*/VARIANT_ID=$IMAGE_NAME/" /usr/lib/os-release
 sed -i "s/^PRETTY_NAME=.*/PRETTY_NAME=\"$IMAGE_PRETTY_NAME\"/" /usr/lib/os-release
 sed -i "s/^NAME=.*/NAME=\"$IMAGE_NAME\"/" /usr/lib/os-release
-
-./99-build-initramfs.sh
-
-./999-cleanup.sh
