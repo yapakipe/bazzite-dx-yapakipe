@@ -11,8 +11,7 @@ set -ouex pipefail
 
 # this installs a package from fedora repos
 dnf5 install -y \
-    gparted \
-    ufw
+    gparted
 
 # Use a COPR Example:
 #
@@ -21,7 +20,5 @@ dnf5 install -y \
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 
-#### Services
-systemctl disable firewalld
-systemctl enable ufw
-
+## System-wide autostart
+rm /etc/xdg/autostart/steam.desktop
