@@ -1,13 +1,14 @@
 # Custom bazzite-dx image
 
-This repository is for building a custom bazzite-dx image.
+This repository is for building a custom bazzite-dx image for my own use. Feel free to use it, but it comes with zero guarantee! Also feel free to file bugs if you find an issue _speicific to this image_, but again, there's no guarantee I'll even look at it :-) This is just me tinkering, not me providing a great image for people to use... Ok, ça, c'est fait.
 
-It is based on the ublue-os image template found at [https://github.com/ublue-os/image-template](https://github.com/ublue-os/image-template). The original readme for that repo at the time _this_ repo was created is [ORIGINAL-TEMPLATE-README.md](./ORIGINAL-TEMPLATE-README.md)
+This is based on the ublue-os image template found at [https://github.com/ublue-os/image-template](https://github.com/ublue-os/image-template). The original readme for that repo at the time _this_ repo was created is [ORIGINAL-TEMPLATE-README.md](./ORIGINAL-TEMPLATE-README.md)
 
 # Purpose of this image
 
 This image is meant to be bazzite-dx plus:
 - gparted
+- ufw (and firewalld is disabled)
 
 That's it for now.
 
