@@ -13,7 +13,6 @@ copy_systemfiles_for() {
 		DISPLAY_NAME=$CUSTOM_NAME
 	fi
 	printf "::group:: ===%s-file-copying===\n" "${DISPLAY_NAME}"
-    printf "--->${CONTEXT_PATH}/$WHAT/.<--"
 	cp -avf "${CONTEXT_PATH}/$WHAT/." /
 	printf "::endgroup::\n"
 }
