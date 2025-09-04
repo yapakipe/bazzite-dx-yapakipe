@@ -39,8 +39,19 @@ dnf5 install -y \
 rm /etc/xdg/autostart/steam.desktop
 
 
+# Copy system files
 CUSTOM_NAME=
 copy_systemfiles_for yapakipe_system_files
 
+#####################################################################################
+# Fix libvirtd not working after new install or after new deployment ######
+#
+# 1) Run 'yapakipe-post-update' with every 'ujust update'. This re-enables the libvirtd
+#    service after rebooting - but only in cases where there isn't a new deployment.
 sed -i '$ a\"Yapakipe post-update fixes" = "/usr/libexec/topgrade/yapakipe-post-update"' /etc/ublue-os/topgrade.toml
-
+#
+# 2) For new deployments, let's create the service file link here for the service that
+#    restarts libvirtd.
+ln -s /usr/lib/systemd/system/bazzite-libvirtd-setup.service /etc/systemd/system/multi-user.target.wants/bazzite-libvirtd-setup.service
+#
+#####################################################################################
