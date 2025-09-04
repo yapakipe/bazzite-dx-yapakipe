@@ -2,6 +2,18 @@
 
 set -ouex pipefail
 
+copy_systemfiles_for() {
+	WHAT=$1
+	shift
+	DISPLAY_NAME=$WHAT
+	if [ "${CUSTOM_NAME}" != "" ] ; then
+		DISPLAY_NAME=$CUSTOM_NAME
+	fi
+	printf "::group:: ===%s-file-copying===\n" "${DISPLAY_NAME}"
+	cp -avf "${CONTEXT_PATH}/$WHAT/." /
+	printf "::endgroup::\n"
+}
+
 ### Install packages
 
 # Packages can be installed from any enabled yum repo on the image.
@@ -20,5 +32,12 @@ dnf5 install -y \
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 
-## System-wide autostart
+## Don't automatically start Steam
 rm /etc/xdg/autostart/steam.desktop
+
+
+CUSTOM_NAME=
+copy_systemfiles_for yapakipe_system_files
+
+sed -i '$ a\"Yapakipe post-update fixes" = "/usr/libexec/topgrade/yapakipe-post-update"' /etc/ublue-os/topgrade.toml
+

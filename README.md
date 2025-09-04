@@ -26,7 +26,28 @@ To rebase to this image:
 rpm-ostree rebase  ostree-image-signed:docker://ghcr.io/yapakipe/bazzite-dx-yapakipe:latest
 ```
 
-To rebase back to bazzite-dx:
-```bash
-rpm-ostree rebase ostree-unverified-registry:ghcr.io/ublue-os/bazzite-dx:stable
+To rebase back to bazzite or bazzite-dx, first check whether you have any layered packages that were installed on to of your current image:
 ```
+rpm-ostree status
+```
+
+If you have multiple images available, the current one will be marked with a bullet on the left. If you see a "LayeredPackages" line for your current image, then remove them with:
+
+```
+rpm-ostree reset
+```
+
+(you might have to reboot after running that command)
+
+Once you're sure you're on a clean image, you can switch to various other images with the following commands:
+
+- Bazzite: `sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/ublue-os/bazzite:stable`
+    - Or is it `ostree-image-signed:docker://ghcr.io/ublue-os/bazzite:stable` ?  
+- Bazzite DX: `sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/ublue-os/bazzite-dx:stable`
+- Aurora: `sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/ublue-os/aurora:stable`
+- Aurora DX: Rebase to the regular Aurora (above), then run `ujust devmode` and choose Enable
+
+Note: Not sure about the 'ostree-unverified-registry' vs. 'ostree-image-signed:docker', what's that about?
+
+
+sudo rpm-ostree rebase ostree-image-signed:docker://ghcr.io/ublue-os/bazzite-dx:stable
