@@ -2,6 +2,9 @@
 
 set -ouex pipefail
 
+CONTEXT_PATH="$(realpath "$(dirname "$0")/..")" # should return /run/context
+export CONTEXT_PATH
+
 copy_systemfiles_for() {
 	WHAT=$1
 	shift
