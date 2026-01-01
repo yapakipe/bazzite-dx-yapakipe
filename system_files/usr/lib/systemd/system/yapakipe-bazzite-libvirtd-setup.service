@@ -1,0 +1,23 @@
+# This is a copy of bazzite-libvirtd-setup.service, but that doesn't disable itself after it has run once.
+# Why:
+# - When using virtualization, it will often happen that networking stops functioning in VMs.
+# - Re-enabling virtualization through ujust "fixes" it, after rebooting.
+# - I narrowed it down to just enabling bazzite-libvirtd-setup.service and rebooting.
+# - My initial approach was then to do add this as a step at the end of ujust update as that seemed to
+#   be when the problem would come back (after a ujust update). However, it still breaks once in a while.
+# - So I'm now trying this instead: A "clone" of bazzite-libvirtd-setup.service, but which doesn't disable itself
+#   after running once, so it does its job at every boot.
+[Unit]
+Description=Enable libvirtd service after reboot
+After=local-fs.target
+ConditionPathExists=/usr/lib/systemd/system/libvirtd.service
+
+[Service]
+Type=oneshot
+# TODO: Rewrite this whenever systemd allows to queue ephemeral commands for next boot without modifying kernel args
+ExecStart=/usr/bin/bash -c "systemctl enable --now libvirtd; restorecon -Rv /var/log/libvirt /var/lib/libvirt"
+
+# Contrary to 'bazzite-libvirtd-setup.service', we don't do "systemctl disable %n" at the end of the ExecStart, so this happens again at every boot.
+
+[Install]
+WantedBy=multi-user.target
