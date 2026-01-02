@@ -1,7 +1,0 @@
-#!/usr/bin/bash
-shopt -s nullglob
-
-echo "===== Yapakipe Post-Update ====="
-# (disabled for now, trying another workaround instead...)
-# echo "Re-enabling bazzite-libvirtd-setup"
-# systemctl enable bazzite-libvirtd-setup.service
