@@ -26,6 +26,7 @@ copy_systemfiles_for() {
 
 # this installs a package from fedora repos
 dnf5 install -y \
+	blivet-gui \
     gparted
 
 # Use a COPR Example:
